@@ -18,11 +18,11 @@ const HomePage = () => {
     };
     trendingMovies();
   }, []);
-  console.log(trendingFilms);
+  //   console.log(trendingFilms);
   return (
     <div>
       <h2>Home Page</h2>
-      <MovieList trendingFilms={trendingFilms} />
+      <MovieList movies={trendingFilms} />
     </div>
   );
 };

@@ -1,9 +1,9 @@
 // import css from './MovieList.module.css'
 
-const MovieList = ({ trendingFilms }) => {
+const MovieList = ({ movies }) => {
   return (
     <ul>
-      {trendingFilms.map(({ id, original_title }) => {
+      {movies.map(({ id, original_title }) => {
         return <li key={id}>{original_title}</li>;
       })}
     </ul>
