@@ -19,8 +19,8 @@ const MovieDetailsPage = () => {
     };
     movieDetailsRequest();
   }, [movieId]);
-  console.log(movieDetails);
-  //   console.log(movieDetails.genres);
+  //   console.log(movieDetails);
+
   const baseUrl = "https://image.tmdb.org/t/p/w500/";
   return (
     <div>
