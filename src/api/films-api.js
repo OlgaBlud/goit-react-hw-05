@@ -1,6 +1,5 @@
 import axios from "axios";
 
-// запит повної інформації про фільм
 // запит інформації про акторський склад
 // запит оглядів для сторінки кінофільму.
 
@@ -25,6 +24,12 @@ export const fetchMovieByQuery = async (query) => {
     `search/movie?query=${query}&include_adult=false&language=en-US&page=1`,
     options
   );
+  // console.log(response);
+  return response.data;
+};
+
+export const fetchMovieDetails = async (id) => {
+  const response = await axios.get(`movie/${id}`, options);
   // console.log(response);
   return response.data;
 };

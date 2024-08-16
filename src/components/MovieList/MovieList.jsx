@@ -1,10 +1,18 @@
 // import css from './MovieList.module.css'
 
+import { Link } from "react-router-dom";
+
 const MovieList = ({ movies }) => {
   return (
     <ul>
-      {movies.map(({ id, original_title }) => {
-        return <li key={id}>{original_title}</li>;
+      {movies.map(({ id, title }) => {
+        return (
+          <li key={id}>
+            <Link to={`/movies/${id}`}>
+              <h3>{title}</h3>
+            </Link>
+          </li>
+        );
       })}
     </ul>
   );
