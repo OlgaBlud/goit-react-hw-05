@@ -1,28 +1,34 @@
-// '/' – компонент HomePage, домашня сторінка із списком популярних кінофільмів.
 // import css from './HomePage.module.css'
 
 import { useEffect, useState } from "react";
 import MovieList from "../../components/MovieList/MovieList";
 import { fetchTrendingMovies } from "../../api/films-api";
+import Loader from "../../components/Loader/Loader";
 const HomePage = () => {
   const [trendingFilms, setTrendingFilms] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
   useEffect(() => {
-    const trendingMovies = async () => {
+    const getTrendingMovies = async () => {
+      setIsLoading(true);
+      setError(null);
       try {
         const response = await fetchTrendingMovies();
-        // console.log(response);
         setTrendingFilms(response.results);
       } catch (error) {
-        console.log(error);
+        setError(error.message);
+      } finally {
+        setIsLoading(false);
       }
     };
-    trendingMovies();
+    getTrendingMovies();
   }, []);
   //   console.log(trendingFilms);
   return (
     <div>
-      <h2>Home Page</h2>
-      <MovieList movies={trendingFilms} />
+      {trendingFilms.length > 0 && <MovieList movies={trendingFilms} />}
+      {isLoading && <Loader />}
+      {/* {error && <Heading title="Something went wrong ..." bottom />} */}
     </div>
   );
 };

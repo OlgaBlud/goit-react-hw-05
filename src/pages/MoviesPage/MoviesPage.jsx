@@ -5,10 +5,13 @@ import { fetchMovieByQuery } from "../../api/films-api";
 
 import MovieList from "../../components/MovieList/MovieList";
 import { useSearchParams } from "react-router-dom";
+import Loader from "../../components/Loader/Loader";
 
 const MoviesPage = () => {
   //   const [query, setQuery] = useState("");
   const [movieList, setMovieList] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
   const [searchParams, setSearchParams] = useSearchParams();
   const searchQuery = searchParams.get("query");
 
@@ -24,15 +27,19 @@ const MoviesPage = () => {
     if (!searchQuery) {
       return;
     }
-    const fetchMovies = async () => {
+    const getMoviesByQuery = async () => {
+      setIsLoading(true);
+      setError(null);
       try {
         const { results } = await fetchMovieByQuery(searchQuery);
         setMovieList(results);
       } catch (error) {
-        console.log(error);
+        setError(error.message);
+      } finally {
+        setIsLoading(false);
       }
     };
-    fetchMovies();
+    getMoviesByQuery();
   }, [searchQuery]);
   return (
     <div>
@@ -41,6 +48,8 @@ const MoviesPage = () => {
         <button type="submit">Search</button>
       </form>
       {movieList.length > 0 && <MovieList movies={movieList} />}
+      {isLoading && <Loader />}
+      {/* {error && <Heading title="Something went wrong ..." bottom />} */}
     </div>
   );
 };

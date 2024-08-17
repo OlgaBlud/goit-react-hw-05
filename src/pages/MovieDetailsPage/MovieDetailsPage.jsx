@@ -9,26 +9,31 @@ import {
   useParams,
 } from "react-router-dom";
 import { fetchMovieDetails } from "../../api/films-api";
+import Loader from "../../components/Loader/Loader";
 
 const MovieDetailsPage = () => {
   const { movieId } = useParams();
-  //   console.log(movieId, "/movies/:movieId");
   const [movieDetails, setMovieDetails] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
   const location = useLocation();
-  //   console.log("locat det page", location);
   const backLink = useRef(location.state?.from ?? "/movies");
+
   useEffect(() => {
-    const movieDetailsRequest = async () => {
+    const getMovieDetailsRequest = async () => {
+      setIsLoading(true);
+      setError(null);
       try {
         const data = await fetchMovieDetails(movieId);
         setMovieDetails(data);
       } catch (error) {
-        console.log(error);
+        setError(error.message);
+      } finally {
+        setIsLoading(false);
       }
     };
-    movieDetailsRequest();
+    getMovieDetailsRequest();
   }, [movieId]);
-  //   console.log(movieDetails);
 
   const baseUrl = "https://image.tmdb.org/t/p/w500/";
   return (
@@ -55,53 +60,10 @@ const MovieDetailsPage = () => {
       <NavLink to="cast">Cast</NavLink>
       <NavLink to="reviews">Reviews</NavLink>
       <Outlet />
+      {isLoading && <Loader />}
+      {/* // {error && <Heading title="Something went wrong ..." bottom />} */}
     </div>
   );
 };
 
 export default MovieDetailsPage;
-
-//  const [postDetails, setPostDetails] = useState(null);
-//   const [isLoading, setIsLoading] = useState(false);
-//   const [error, setError] = useState(null); // "Omg... Some error occured!"
-
-//   useEffect(() => {
-//     const fetchPostDetails = async () => {
-//       try {
-//         setIsLoading(true);
-//         const data = await requestSinglePostData(postId);
-//         console.log("data: ", data);
-//         setPostDetails(data);
-//       } catch (err) {
-//         setError(err.message);
-//       } finally {
-//         setIsLoading(false);
-//       }
-//     };
-
-//     fetchPostDetails();
-//   }, [postId]);
-
-//   return (
-//     <div>
-//       Post Details. ID: {postId}
-//       {postDetails !== null && (
-//         <div>
-//           <h1>{postDetails.title}</h1>
-//           <p>{postDetails.body}</p>
-//         </div>
-//       )}
-//       <div>
-//         <NavLink to="comments">Comments</NavLink>
-//         <NavLink to="reviews">Reviews</NavLink>
-//       </div>
-//       <div>
-//         <Outlet />
-//       </div>
-//       {isLoading && <Loader />}
-//       {error !== null && (
-//         <p style={{ color: "red" }}>{error}. Please, try again later.</p>
-//       )}
-//     </div>
-//   );
-// };
