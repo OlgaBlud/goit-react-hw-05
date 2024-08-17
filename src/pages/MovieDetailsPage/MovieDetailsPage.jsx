@@ -1,13 +1,22 @@
 // import css from "./MovieDetailsPage.module.css";
 
-import { useEffect, useState } from "react";
-import { NavLink, Outlet, useParams } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
+import {
+  Link,
+  NavLink,
+  Outlet,
+  useLocation,
+  useParams,
+} from "react-router-dom";
 import { fetchMovieDetails } from "../../api/films-api";
 
 const MovieDetailsPage = () => {
   const { movieId } = useParams();
   //   console.log(movieId, "/movies/:movieId");
   const [movieDetails, setMovieDetails] = useState(null);
+  const location = useLocation();
+  //   console.log("locat det page", location);
+  const backLink = useRef(location.state?.from ?? "/movies");
   useEffect(() => {
     const movieDetailsRequest = async () => {
       try {
@@ -24,6 +33,7 @@ const MovieDetailsPage = () => {
   const baseUrl = "https://image.tmdb.org/t/p/w500/";
   return (
     <div>
+      <Link to={backLink.current}>Go back</Link>
       {movieDetails !== null && (
         <div>
           <img

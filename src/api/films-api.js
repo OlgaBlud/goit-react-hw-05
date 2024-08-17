@@ -1,8 +1,5 @@
 import axios from "axios";
 
-// запит інформації про акторський склад
-// запит оглядів для сторінки кінофільму.
-
 // const API_KEY = "2b797d5086fa4a91bb2a8fb9e27d71ff";
 axios.defaults.baseURL = "https://api.themoviedb.org/3";
 
