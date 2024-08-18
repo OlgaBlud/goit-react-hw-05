@@ -61,7 +61,7 @@ const MovieDetailsPage = () => {
       <NavLink to="reviews">Reviews</NavLink>
       <Outlet />
       {isLoading && <Loader />}
-      {/* // {error && <Heading title="Something went wrong ..." bottom />} */}
+      {error && <h2>Something went wrong ...</h2>}
     </div>
   );
 };

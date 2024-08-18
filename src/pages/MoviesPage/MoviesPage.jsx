@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { fetchMovieByQuery } from "../../api/films-api";
-
 import MovieList from "../../components/MovieList/MovieList";
 import { useSearchParams } from "react-router-dom";
 import Loader from "../../components/Loader/Loader";
@@ -49,7 +48,7 @@ const MoviesPage = () => {
       </form>
       {movieList.length > 0 && <MovieList movies={movieList} />}
       {isLoading && <Loader />}
-      {/* {error && <Heading title="Something went wrong ..." bottom />} */}
+      {error && <h2>Something went wrong ...</h2>}
     </div>
   );
 };

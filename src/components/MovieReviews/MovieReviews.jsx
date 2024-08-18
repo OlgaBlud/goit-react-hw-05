@@ -26,7 +26,7 @@ const MovieReviews = () => {
     };
     movieReviewsRes();
   }, [movieId]);
-  console.log(movieReviews);
+  //   console.log(movieReviews);
   if (movieReviews.length === 0) {
     return <p>There are no reviews yet</p>;
   } else {
@@ -43,7 +43,7 @@ const MovieReviews = () => {
             );
           })}
         </ul>
-        {/* {error && <Heading title="Something went wrong ..." bottom />} */}
+        {error && <h2>Something went wrong ...</h2>}
       </>
     );
   }

@@ -41,7 +41,7 @@ const MovieCast = () => {
         })}
       </ul>
       {isLoading && <Loader />}
-      {/* {error && <Heading title="Something went wrong ..." bottom />} */}
+      {error && <h2>Something went wrong ...</h2>}
     </>
   );
 };

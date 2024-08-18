@@ -28,7 +28,7 @@ const HomePage = () => {
     <div>
       {trendingFilms.length > 0 && <MovieList movies={trendingFilms} />}
       {isLoading && <Loader />}
-      {/* {error && <Heading title="Something went wrong ..." bottom />} */}
+      {error && <h2>Something went wrong ...</h2>}
     </div>
   );
 };
