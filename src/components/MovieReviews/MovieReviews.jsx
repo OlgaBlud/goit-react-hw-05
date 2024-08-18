@@ -26,7 +26,7 @@ const MovieReviews = () => {
     };
     movieReviewsRes();
   }, [movieId]);
-  //   console.log(movieReviews);
+
   if (movieReviews.length === 0) {
     return <p>There are no reviews yet</p>;
   } else {
@@ -37,8 +37,8 @@ const MovieReviews = () => {
           {movieReviews.map(({ content, author, id }) => {
             return (
               <li key={id}>
+                <h3>{author}</h3>
                 <p>{content}</p>
-                <p>{author}</p>
               </li>
             );
           })}

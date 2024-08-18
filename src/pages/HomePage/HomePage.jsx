@@ -1,5 +1,3 @@
-// import css from './HomePage.module.css'
-
 import { useEffect, useState } from "react";
 import MovieList from "../../components/MovieList/MovieList";
 import { fetchTrendingMovies } from "../../api/films-api";
@@ -23,7 +21,7 @@ const HomePage = () => {
     };
     getTrendingMovies();
   }, []);
-  //   console.log(trendingFilms);
+
   return (
     <div>
       {trendingFilms.length > 0 && <MovieList movies={trendingFilms} />}

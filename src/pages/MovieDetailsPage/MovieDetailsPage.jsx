@@ -1,15 +1,8 @@
-// import css from "./MovieDetailsPage.module.css";
-
 import { useEffect, useRef, useState } from "react";
-import {
-  Link,
-  NavLink,
-  Outlet,
-  useLocation,
-  useParams,
-} from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { fetchMovieDetails } from "../../api/films-api";
 import Loader from "../../components/Loader/Loader";
+import MovieInfo from "../../components/MovieInfo/MovieInfo";
 
 const MovieDetailsPage = () => {
   const { movieId } = useParams();
@@ -35,31 +28,12 @@ const MovieDetailsPage = () => {
     getMovieDetailsRequest();
   }, [movieId]);
 
-  const baseUrl = "https://image.tmdb.org/t/p/w500/";
   return (
     <div>
-      <Link to={backLink.current}>Go back</Link>
       {movieDetails !== null && (
-        <div>
-          <img
-            src={baseUrl + movieDetails.backdrop_path}
-            alt={movieDetails.title}
-          />
-          <h2>{movieDetails.title}</h2>{" "}
-          <p>User score : {movieDetails.vote_average}</p>
-          <h3>Overview</h3>
-          <p>{movieDetails.overview}</p>
-          <h3>Genres</h3>
-          <ul>
-            {movieDetails.genres.map(({ id, name }) => {
-              return <li key={id}>{name}</li>;
-            })}
-          </ul>
-        </div>
+        <MovieInfo backLink={backLink} {...movieDetails} />
       )}
-      <NavLink to="cast">Cast</NavLink>
-      <NavLink to="reviews">Reviews</NavLink>
-      <Outlet />
+
       {isLoading && <Loader />}
       {error && <h2>Something went wrong ...</h2>}
     </div>

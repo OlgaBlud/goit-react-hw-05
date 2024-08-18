@@ -1,11 +1,11 @@
 // import css from "./NotFoundPage.module.css";
-/* Якщо користувач зайшов за неіснуючим маршрутом, потрібно показувати компонент NotFoundPage, в якому є посилання Link на домашню сторінку. */
+
+import { Link } from "react-router-dom";
 
 const NotFoundPage = () => {
   return (
     <div>
-      NotFoundPage
-      {/* <Navigate to="/" /> */}
+      <Link to="/">Back to Home Page</Link>
     </div>
   );
 };
