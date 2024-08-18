@@ -16,7 +16,8 @@ const MovieInfo = ({
         🔙
       </Link>
       <div>
-        <img src={baseUrl + backdrop_path} alt={title} />
+        {backdrop_path && <img src={baseUrl + backdrop_path} alt={title} />}
+        {/* <img src={baseUrl + backdrop_path} alt={title} /> */}
         <h2>{title}</h2>
         <p>User score : {vote_average}</p>
         <h3>Overview</h3>
